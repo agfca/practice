@@ -25,6 +25,13 @@ public class NewPointOfJDK8 {
      */
     public static void main(String[] args) {
 
+
+        String first = "";
+        Comparator<String> comparator = (one, two) -> Integer.compare(one.length(), two.length());  //编译会出错
+
+
+
+
         String[] arr = new String[6];
         arr[0] = "000000";
         arr[1] = "111111";
