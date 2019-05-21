@@ -24,6 +24,28 @@ public class NewPointOfJDK8 {
      * chain 链子
      */
     public static void main(String[] args) {
+
+        String[] arr = new String[6];
+        arr[0] = "000000";
+        arr[1] = "111111";
+        arr[2] = "22222";
+        arr[3] = "33";
+
+        String a = null;
+        /*if (s == null) {
+            s = "null";
+        }*/
+        System.out.println(a.toString()+"dssd");
+
+        Arrays.asList(arr).forEach(s -> {
+            if (s!=null&&s.length() < 3) {
+                return;     //  这个return语句并不能终止loop循环。
+            }else{
+                System.out.println("-----------"+s+"-----------");
+            }
+        });
+
+
         List<String> names1 = new ArrayList<String>();
         names1.add("Google ");
         names1.add("Runoob ");
@@ -45,6 +67,12 @@ public class NewPointOfJDK8 {
         sortUsingJava8_4(names2);
 
         System.out.printf("sssss/t/n\t22");
+
+        Msg msg = word -> System.out.println(word);
+        Msg msg1 = word -> System.out.println("test"+word);
+
+        msg.sayMsg("test");
+        msg1.sayMsg("test");
     }
 
     private static void sortUsingJava7(List<String> names){
@@ -90,6 +118,10 @@ public class NewPointOfJDK8 {
      * .thenComparing(o -> o.second).thenComparingInt(o -> o.third));
      */
 
+    interface Msg{
+        void sayMsg(String msg);
+
+    }
 
     class Person{
         private String name;
