@@ -1,5 +1,6 @@
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 /**
  * @author guofucheng
@@ -9,7 +10,11 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class MainTest {
 
     public static void main(String[] args) {
-
+        List<Integer> test = Arrays.asList(new Integer[]{1,2,3,4});
+        List<Integer> test1 = Arrays.asList(1,2,3,4);
+        List<Number> results = test.stream()
+                .filter(n -> n> 5)
+                .collect(Collectors.toList());
 
 
         List<Comment> list = new ArrayList<>();
@@ -60,10 +65,20 @@ public class MainTest {
         });
 
         System.out.println("---");
+
+        List<Integer> integerList = new ArrayList<Integer>(Arrays.asList(1,2,3));
+        IntSummaryStatistics a = integerList.stream().mapToInt(Integer::intValue).summaryStatistics();
+
     }
 }
 
 class Comment{
+
+    public static void main(String[] args) {
+        Optional<Comment> commentOpt = Optional.empty();
+        commentOpt.get();
+    }
+
     String content;
     Date createTime;
     public Comment(String content){
