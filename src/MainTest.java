@@ -1,5 +1,11 @@
+import org.omg.CORBA.UNKNOWN;
+import org.omg.CORBA.UserException;
+
+import javax.swing.text.html.Option;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 /**
@@ -17,7 +23,11 @@ public class MainTest {
                 .collect(Collectors.toList());
 
 
+
         List<Comment> list = new ArrayList<>();
+
+        list.stream().peek(comment -> System.out.println(comment.getContent())).collect(Collectors.toList());
+
         Comment comment1 = new Comment("111");
         Comment comment2 = new Comment("222");
         Comment comment3 = new Comment("333");
@@ -28,10 +38,12 @@ public class MainTest {
         list.add(comment3);
         list.add(comment4);
 
+
         //通知对象
         List<Comment> noticeIdList =new ArrayList<Comment>(list);
 
-
+noticeIdList.stream().peek(comment ->
+        System.out.println(comment.getContent()));
 
         list.removeIf(comment -> comment.getContent().equals("111"));
 
@@ -76,13 +88,29 @@ class Comment{
 
     public static void main(String[] args) {
         Optional<Comment> commentOpt = Optional.empty();
-        commentOpt.get();
+
+        Optional<Comment> opt = Optional.ofNullable(null);
+        String name = "test";
+        Optional<String> StringOpt = Optional.ofNullable(name);
+        //System.out.println("test".equals(StringOpt.toString()));
+        StringOpt.get();
+
+        opt.ifPresent(System.out::println);
+
+        Consumer<Comment> commentConsumer = comment -> comment.setContent("33");
+
+        String ss = opt.flatMap(str -> Optional.of("33")).orElse("232");
+
+
     }
 
     String content;
     Date createTime;
     public Comment(String content){
         this.content = content;
+    }
+    public Comment(){
+
     }
 
     public String getContent() {
